@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/registration.css}" href="../static/css/registration.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/styles.css}" href="../static/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/components.css}" href="../static/css/components.css" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js" rel="script"
+            type="text/javascript"></script>
+    <script th:src="@{/js/functions.js}" src="../static/js/functions.js" rel="script" type="text/javascript"></script>
+</head>
+<body>
+<header>
+    <h1>ENGINEER 2.0</h1>
+</header>
+<main>
+    <h3 class="title">Зарегистрироваться или <a href="/login">войти</a></h3>
+    <form id="registration-form" method="post" action="/register">
+        <div id="text-data">
+            <label for="email-field" hidden>Email: </label>
+            <input id="email-field" class="text-field" type="email" name="email"
+                   placeholder="ivanov.a@mail.com" about="">
+            <label for="first-name-field" hidden>First name: </label>
+            <input id="first-name-field" class="text-field" type="text" name="firstName"
+                   placeholder="Ivanov">
+            <label for="last-name-field" hidden>Last name: </label>
+            <input id="last-name-field" class="text-field" type="text" name="lastName"
+                   placeholder="Ivan">
+            <label for="personal-number-field" hidden>Personal number: </label>
+            <input id="personal-number-field" class="text-field" type="text" name="tabId"
+                   placeholder="10607949">
+        </div>
+        <div id="roles-department-block">
+            <div id="roles">
+                <div class="radio-block" th:each="role : ${roles}">
+                    <input th:id="${'radiobtn-' + role}"
+                           type="radio"
+                           name="position"
+                           th:value="${role.getAuthority()}"
+                           value="Специалист отдела"
+                           oninput="checkDropDownList(this.value)">
+                    <label th:for="${'radiobtn-' + role}" th:text="${role.getAuthority()}">Специалист
+                        отдела</label>
+                </div>
+            </div>
+            <label for="department" hidden>Department: </label>
+            <select id="department" class="select-style" name="department" disabled>
+                <option th:each="dep : ${departments}" th:value="${dep}" th:text="${dep.getName()}">
+                    Металлургический отдел
+                </option>
+            </select>
+        </div>
+    </form>
+    <button form="registration-form" class="btn" type="reset">Сбросить поля</button>
+    <button form="registration-form" class="btn" type="submit">Зарегистрировать</button>
+</main>
+
+</body>
+</html>

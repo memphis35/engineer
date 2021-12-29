@@ -1,0 +1,33 @@
+:root {
+    --midnight-blue: #0b8eab;
+    --sky-grey: #d1dcde;
+    --skin: #f7e8e3;
+    --brown: #573625;
+    --dark-indigo: #04323a;
+}
+
+@font-face {
+    font-family: SaucerBB;
+    src: url("../fonts/SaucerBB.ttf");
+}
+
+body {
+    height: 100%;
+    width: 650px;
+    margin: 10% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    color: var(--dark-indigo);
+    border-color: var(--dark-indigo);
+}
+
+header {
+    background-color: var(--sky-grey);
+    text-align: center;
+    font-family: SaucerBB, sans-serif;
+    border-bottom: 2px solid;
+    border-radius: 5px 5px 0 0;
+    box-sizing: border-box;
+}

@@ -1,0 +1,19 @@
+main {
+    background-color: var(--sky-grey);
+    text-align: center;
+}
+
+h3 {
+    margin: 10px auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form * {
+    border: black 1px solid;
+}
