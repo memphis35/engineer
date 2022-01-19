@@ -1,32 +1,33 @@
+#logo {
+    margin: 0 auto;
+}
+
 a {
-    color: var(--brown);
+    color: var(--link-blue);
+}
+
+.text-field, .btn {
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: var(--light-grey) 2px solid;
+    border-radius: 5px;
+    transition: all;
+    transition-timing-function: ease;
+    transition-duration: 300ms;
 }
 
 .text-field {
-    display: block;
-    width: 200px;
-    padding: 10px;
-    margin: 10px;
-    border: var(--dark-indigo) 2px solid;
-    border-radius: 5px;
     box-sizing: border-box;
 }
 
 .text-field:focus {
     outline: none;
-    border-color: var(--brown);
-}
-
-.btn {
-    display: block;
-    width: 150px;
-    height: 25px;
-    margin: 10px auto;
-    border: var(--dark-indigo) 2px solid;
-    border-radius: 5px;
+    border-color: var(--deep-grey);
 }
 
 .btn:hover {
-    background-color: var(--brown);
-    color: var(--skin);
+    background-color: var(--deep-grey);
+    border-color: var(--deep-grey);
+    color: var(--sky-grey);
 }

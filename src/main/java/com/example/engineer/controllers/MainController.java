@@ -33,10 +33,10 @@ public class MainController {
         user.setName(params.get("lastName"));
         user.setPassword(passwordGenerator.generateDefaultPassword());
         log.info(user.toString());
-        return "redirect:/login";
+        return "redirect:/loginPage";
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    @RequestMapping(path = "/loginPage", method = RequestMethod.GET)
     public String login() {
         return "login";
     }

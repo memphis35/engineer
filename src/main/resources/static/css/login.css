@@ -1,5 +1,8 @@
 main {
-    background-color: var(--sky-grey);
+    width: 40%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
@@ -10,10 +13,4 @@ h3 {
 form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-form * {
-    border: black 1px solid;
 }

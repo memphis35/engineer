@@ -33,5 +33,5 @@ create table engineer.public.users
 );
 
 insert into engineer.public.users (id, email, password, name, department_id, role, expiration_date)
-values (1, 'asmirnov@engineer.com', '$2a$04$vJhnEi8i20u5u3jTKd2hhetwLU0c23k.9n/9vEyWC367UHq86Q7Ny', 'Smirnov A.', 4,
+values (1, 'asmirnov@engineer.com', '$2a$12$Poyi86C1NuAop4hu4KtZr.IXW.IhYjIWlmu.Y/Ych3Ay9T9deB/yS', 'Smirnov A.', 4,
         'ROLE_ADMIN', '2022-12-31 23:59:59');

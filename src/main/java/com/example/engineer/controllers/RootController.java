@@ -12,7 +12,7 @@ public class RootController {
     @GetMapping
     public String redirect(Authentication authentication) {
         return authentication == null
-                ? "redirect:/login"
-                : "redirect:/home";
+                ? "redirect:/loginPage"
+                : "redirect:/engineer";
     }
 }
