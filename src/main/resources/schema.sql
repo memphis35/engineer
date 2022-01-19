@@ -1,13 +1,18 @@
-drop table if exists engineer.public.users_authority;
 drop table if exists engineer.public.users;
 drop table if exists engineer.public.department;
-drop table if exists engineer.public.authority;
 
-create table engineer.public.department
+create table if not exists engineer.public.department
 (
     id   bigserial primary key,
     name varchar(256) not null unique
 );
+
+insert into engineer.public.department
+values (1, 'Металлургический отдел'),
+       (2, 'Крановый отдел'),
+       (3, 'Электротехнический отдел'),
+       (4, 'Технологический отдел'),
+       (5, 'Отдел сервисного обслуживания');
 
 create table engineer.public.users
 (
@@ -18,6 +23,7 @@ create table engineer.public.users
     position                   varchar(256) not null default 'none',
     department_id              bigint references engineer.public.department (id),
     created                    timestamp    not null default now(),
+    role                       varchar(128) not null default 'ROLE_READ_ONLY',
     expiration_date            timestamp    not null,
     password_changed           timestamp    not null default now(),
     is_enabled                 bool                  default true,
@@ -26,15 +32,6 @@ create table engineer.public.users
     is_credentials_non_expired bool                  default true
 );
 
-create table engineer.public.authority
-(
-    id        bigserial primary key,
-    authority varchar(256) not null
-);
-
-create table engineer.public.users_authority
-(
-    id           bigserial primary key,
-    user_id      bigint references engineer.public.users (id),
-    authority_id bigint references engineer.public.authority (id)
-);
+insert into engineer.public.users (id, email, password, name, department_id, role, expiration_date)
+values (1, 'asmirnov@engineer.com', '$2a$04$vJhnEi8i20u5u3jTKd2hhetwLU0c23k.9n/9vEyWC367UHq86Q7Ny', 'Smirnov A.', 4,
+        'ROLE_ADMIN', '2022-12-31 23:59:59');

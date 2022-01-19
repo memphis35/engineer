@@ -7,10 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(schema = "public", name = "users")
 @Getter
 @Setter
 public class User {
@@ -37,6 +36,10 @@ public class User {
     @Column(name = "created")
     private LocalDateTime createdAt;
 
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
@@ -55,15 +58,8 @@ public class User {
     @Column(name = "is_credentials_non_expired")
     private Boolean credentialNonExpired = true;
 
-    @ManyToMany
-    @JoinTable(name = "users_authority",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    @Enumerated(value = EnumType.STRING)
-    private Set<Authority> authorities;
-
     @Override
     public String toString() {
-        return String.format("id: %s, email: %s, name: %s, auths: %s", id, email, name, authorities);
+        return String.format("id: %s, email: %s, name: %s, auths: %s", id, email, name, role);
     }
 }
