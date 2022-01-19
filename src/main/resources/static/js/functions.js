@@ -6,3 +6,8 @@ function checkDropDownList(position) {
         $("#department").attr('disabled', true);
     }
 }
+
+function showRegister() {
+    $("#login-block").hide();
+    $("#registration-block").show();
+}

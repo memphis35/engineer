@@ -7,25 +7,35 @@
     <link th:href="@{/css/colors.css}" href="../static/css/colors.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/components.css}" href="../static/css/components.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/login.css}" href="../static/css/login.css" type="text/css" rel="stylesheet"/>
+    <script th:src="@{/static/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js" rel="script"
+            type="text/javascript"></script>
+    <script th:src="@{/static/js/functions.js}" src="../static/js/functions.js" rel="script" type="text/javascript"></script>
 </head>
 <body>
 <header id="header">
     <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
 </header>
 <main id="login">
-    <h3>Войти в систему</h3>
-    <form action="/login" method="post">
-        <label for="username" hidden>Username: </label>
-        <input id="username" class="text-field" name="username" type="text" placeholder="user@mail.com">
-        <label for="password" hidden>Username: </label>
-        <input id="password" class="text-field" name="password" type="password" placeholder="password">
-        <button class="btn" type="submit">Войти</button>
-        <button class="btn" type="button" onclick="showRegister()">Зарегистрироваться</button>
-    </form>
-    <div id="modal-registration" hidden>
+    <div id="login-block">
+        <h3>Войти в систему</h3>
+        <form action="/login" method="post">
+            <label for="username" hidden></label>
+            <input id="username" class="text-field" name="username" type="text" placeholder="user@mail.com">
+            <label for="password" hidden></label>
+            <input id="password" class="text-field" name="password" type="password" placeholder="password">
+            <button class="btn" type="submit">Войти</button>
+            <button class="btn" type="button" onclick="showRegister()">Зарегистрироваться</button>
+        </form>
+    </div>
+    <div id="registration-block" hidden>
+        <h3>Регисстрация</h3>
         <form action="/register" method="post">
-            <input type="text" placeholder="Фамилия">
-            <input type="text" placeholder="Имя">
+            <label for="reg-firstname" hidden></label>
+            <input id="reg-firstname" class="text-field" type="text" placeholder="Фамилия">
+            <label for="reg-lastname" hidden></label>
+            <input id="reg-lastname" class="text-field" type="text" placeholder="Имя">
+            <button class="btn" type="submit">Зарегистрироваться</button>
+            <button class="btn" type="reset">Сбросить поля</button>
         </form>
     </div>
 </main>
