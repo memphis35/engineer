@@ -1,0 +1,10 @@
+### IDEA stuff
+
+/.idea
+*.iml
+
+### Gradle stuff
+
+/gradle
+/build
+.gradle
