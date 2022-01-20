@@ -24,6 +24,7 @@
             <input id="username" class="text-field" name="username" type="text" placeholder="user@mail.com">
             <label for="password" hidden></label>
             <input id="password" class="text-field" name="password" type="password" placeholder="password">
+            <input name="_csrf" th:value="${_csrf.token}" hidden>
             <button class="btn" type="submit">Войти</button>
             <button class="btn" type="button" onclick="showRegister()">Зарегистрироваться</button>
         </form>

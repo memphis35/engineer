@@ -11,7 +11,7 @@ values (1, 'Конструкторский центр'),
 on conflict do nothing;
 
 insert into engineer.public.users (id, email, password, name, department_id, role, expiration_date, created)
-values (-1, 'asmirnov@engineer.com', '$2a$12$Poyi86C1NuAop4hu4KtZr.IXW.IhYjIWlmu.Y/Ych3Ay9T9deB/yS', 'Александр Смирнов',
+values (-1, 'asmirnov@engineer.com', '$2a$12$ed2d32KFaQgvGuT8SxeKY.4sLBJiNfcx1BVavEfUpvCBtZ40J2cWW', 'Александр Смирнов',
         4,
         'ROLE_ADMIN', '2022-12-31 23:59:59', now())
 on conflict do nothing;
