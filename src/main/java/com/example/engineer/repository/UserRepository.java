@@ -6,7 +6,7 @@ public interface UserRepository {
 
     User findUser(Long id);
 
-    void createUser(User newUser);
+    User createUser(User newUser);
 
     boolean userExists(String email);
 

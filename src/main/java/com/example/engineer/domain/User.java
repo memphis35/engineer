@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "users")
@@ -18,25 +17,21 @@ public class User {
     private Long id;
 
     @Column(name = "email")
-    @NotBlank(message = "Email can't be null or empty")
-    @Pattern(regexp = "^[0-9A-Za-z_.-]{3,}@[0-9A-Za-z]+\\.[a-z]{2,}", message = "Please, make sure your email is correct")
     private String email;
 
     @Column(name = "password")
-    @NotBlank(message = "Password can't be null")
     private String password;
 
     @Column(name = "name")
-    @NotBlank(message = "Name can't be null or blank")
     private String name;
 
     @ManyToOne(targetEntity = Department.class)
     private Department department;
 
-    @Column(name = "created")
+    @Column(name = "created", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -57,6 +52,10 @@ public class User {
 
     @Column(name = "is_credentials_non_expired")
     private Boolean credentialNonExpired = true;
+
+    @OneToMany
+    @JoinColumn(name = "customer_id")
+    private Set<Task> tasks;
 
     @Override
     public String toString() {

@@ -1,3 +1,7 @@
+$(document).onload(
+    $('')
+);
+
 function checkDropDownList(position) {
     const strPosition = position.toString();
     if (strPosition === 'Специалист отдела' || strPosition === 'Менеджер отдела') {

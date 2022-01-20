@@ -24,9 +24,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void createUser(User newUser) {
-        final User user = userJpaRepository.save(newUser);
-        log.info("User with username");
+    public User createUser(User newUser) {
+        return userJpaRepository.save(newUser);
     }
 
     @Override

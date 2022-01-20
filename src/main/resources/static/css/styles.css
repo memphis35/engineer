@@ -1,19 +1,14 @@
 body {
-    height: 100%;
-    width: 650px;
-    margin: 10% auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
     color: var(--deep-grey);
     border-color: var(--deep-grey);
     -webkit-font-smoothing: antialiased;
 }
 
-header {
-    text-align: center;
-    border-bottom: 2px solid;
-    border-radius: 5px 5px 0 0;
-    box-sizing: border-box;
+#logo {
+    display: block;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }

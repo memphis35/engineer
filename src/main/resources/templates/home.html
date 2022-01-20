@@ -2,17 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Home</title>
     <link th:href="@{/static/css/styles.css}" href="../static/css/styles.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/static/css/components.css}" href="../static/css/components.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/static/css/login.css}" href="../static/css/login.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <header id="header">
-    <h1>ENGINEER 2.0</h1>
+    <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
 </header>
 <main id="login">
-    <h2>welcome home</h2>
+    <h2 th:text="'Привет, ' + ${user.name}">Привет, _юзернейм_</h2>
+    <section id="tasks">
+        <h3>Управление задачами</h3>
+        <table>
+            <tr>
+                <td>Регистрационный номер</td>
+                <td>Дата регистрации</td>
+                <td>Название</td>
+                <td>Заказчик</td>
+                <td>Статус</td>
+            </tr>
+        </table>
+    </section>
 </main>
 </body>
 </html>

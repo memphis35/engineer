@@ -29,6 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/register");
         http.authorizeHttpRequests().mvcMatchers("/register").permitAll()
                 .and()
-                .authorizeHttpRequests().mvcMatchers("/engineer").authenticated();
+                .authorizeHttpRequests().mvcMatchers("/engineer/**").authenticated();
     }
 }

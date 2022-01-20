@@ -3,35 +3,30 @@ package com.example.engineer.controllers;
 import com.example.engineer.domain.Department;
 import com.example.engineer.domain.User;
 import com.example.engineer.repository.DepartmentCrud;
-import com.example.engineer.utils.PasswordGenerator;
+import com.example.engineer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
-import java.util.Set;
 
 @Controller
 @Validated
 @Slf4j
 @RequiredArgsConstructor
 public class MainController {
-    private final Set<String> registerParams = Set.of("firstName", "lastName", "email", "department");
 
     private final DepartmentCrud departmentCrud;
-    private final PasswordGenerator passwordGenerator;
-
-    //@GetMapping(path = "/register")
-    public String register(Model model) {
-        model.addAttribute("departments", departmentCrud.findAll());
-        log.info("redirect to registration.html");
-        return "registration";
-    }
+    private final UserService userService;
 
     @PostMapping(path = "/register")
     public String register(@RequestParam @NotBlank String firstName,
@@ -43,8 +38,7 @@ public class MainController {
         user.setEmail(email);
         user.setName(String.format("%s %s", lastName, firstName));
         user.setDepartment(department);
-        user.setPassword(passwordGenerator.generateDefaultPassword());
-        log.info(user.toString());
+        userService.saveUser(user);
         return "redirect:/loginPage";
     }
 
@@ -54,5 +48,11 @@ public class MainController {
         return "login";
     }
 
-
+    @GetMapping(path = "/engineer")
+    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
+    public String home(Model model, Authentication authentication) {
+        final User user = userService.findUserWithTasks(authentication.getName());
+        model.addAttribute("user", user);
+        return "home";
+    }
 }

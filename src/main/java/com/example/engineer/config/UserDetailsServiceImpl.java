@@ -1,6 +1,8 @@
 package com.example.engineer.config;
 
+import com.example.engineer.repository.UserJpaRepository;
 import com.example.engineer.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,19 +10,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
-
-    @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserJpaRepository userJpaRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (userRepository.userExists(username)) {
-            return new SecurityUser(userRepository.findUserByEmail(username));
+        if (userJpaRepository.existsByEmail(username)) {
+            return new SecurityUser(userJpaRepository.findUserByEmail(username));
         } else {
             throw new UsernameNotFoundException("User with " + username + " doesn't exist");
         }
