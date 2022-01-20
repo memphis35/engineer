@@ -7,9 +7,9 @@
     <link th:href="@{/css/colors.css}" href="../static/css/colors.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/components.css}" href="../static/css/components.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/css/login.css}" href="../static/css/login.css" type="text/css" rel="stylesheet"/>
-    <script th:src="@{/static/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js" rel="script"
+    <script th:src="@{/js/jquery-3.6.0.js}" src="../static/js/jquery-3.6.0.js" rel="script"
             type="text/javascript"></script>
-    <script th:src="@{/static/js/functions.js}" src="../static/js/functions.js" rel="script" type="text/javascript"></script>
+    <script th:src="@{/js/functions.js}" src="../static/js/functions.js" rel="script" type="text/javascript"></script>
 </head>
 <body>
 <header id="header">
@@ -28,12 +28,20 @@
         </form>
     </div>
     <div id="registration-block" hidden>
-        <h3>Регисстрация</h3>
+        <h3>Регистрация</h3>
         <form action="/register" method="post">
-            <label for="reg-firstname" hidden></label>
-            <input id="reg-firstname" class="text-field" type="text" placeholder="Фамилия">
             <label for="reg-lastname" hidden></label>
-            <input id="reg-lastname" class="text-field" type="text" placeholder="Имя">
+            <input id="reg-lastname" class="text-field" type="text" name="firstName" placeholder="Иванов" required>
+            <label for="reg-firstname" hidden></label>
+            <input id="reg-firstname" class="text-field" type="text" name="lastName" placeholder="Иван" required>
+            <label for="reg-email" hidden></label>
+            <input id="reg-email" class="text-field" type="email" name="email" placeholder="iivanov@mail.com" required>
+            <label for="reg-department" hidden></label>
+            <select id="reg-department" class="text-field" name="departmentId" required>
+                <option th:each="dep : ${departments}"
+                        th:value="${dep.id}"
+                        th:label="${dep.name}">Конструкторский центр</option>
+            </select>
             <button class="btn" type="submit">Зарегистрироваться</button>
             <button class="btn" type="reset">Сбросить поля</button>
         </form>

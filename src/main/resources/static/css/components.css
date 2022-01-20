@@ -6,15 +6,20 @@ a {
     color: var(--link-blue);
 }
 
-.text-field, .btn {
+.text-field, .btn, select {
     display: block;
     padding: 10px;
     margin: 10px 0;
+    background-color: var(--sky-grey);
     border: var(--light-grey) 2px solid;
     border-radius: 5px;
     transition: all;
     transition-timing-function: ease;
     transition-duration: 300ms;
+}
+
+.btn {
+    margin: 10px 5%;
 }
 
 .text-field {

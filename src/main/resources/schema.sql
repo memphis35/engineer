@@ -1,6 +1,3 @@
-drop table if exists engineer.public.users;
-drop table if exists engineer.public.department;
-
 create table if not exists engineer.public.department
 (
     id   bigserial primary key,
@@ -12,9 +9,9 @@ values (1, 'Металлургический отдел'),
        (2, 'Крановый отдел'),
        (3, 'Электротехнический отдел'),
        (4, 'Технологический отдел'),
-       (5, 'Отдел сервисного обслуживания');
+       (5, 'Отдел сервисного обслуживания') on conflict do nothing;
 
-create table engineer.public.users
+create table if not exists engineer.public.users
 (
     id                         bigserial primary key,
     email                      varchar(256) not null unique,
@@ -34,4 +31,4 @@ create table engineer.public.users
 
 insert into engineer.public.users (id, email, password, name, department_id, role, expiration_date)
 values (1, 'asmirnov@engineer.com', '$2a$12$Poyi86C1NuAop4hu4KtZr.IXW.IhYjIWlmu.Y/Ych3Ay9T9deB/yS', 'Smirnov A.', 4,
-        'ROLE_ADMIN', '2022-12-31 23:59:59');
+        'ROLE_ADMIN', '2022-12-31 23:59:59') on conflict do nothing;
