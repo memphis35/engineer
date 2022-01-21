@@ -5,27 +5,24 @@
     <title>Home</title>
     <link th:href="@{/static/css/styles.css}" href="../static/css/styles.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/static/css/components.css}" href="../static/css/components.css" type="text/css" rel="stylesheet"/>
-    <link th:href="@{/static/css/colors.css}" href="../static/css/colors.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/static/css/home.css}" href="../static/css/home.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
-<header id="header">
 
-</header>
-<h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
 <main id="login">
+    <h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
     <section id="summary">
-        <div>7</div>
-        <div>2</div>
-        <div>3</div>
-        <div>1</div>
+        <div class="summary black">7</div>
+        <div class="summary red">2</div>
+        <div class="summary yellow">3</div>
+        <div class="summary grey">1</div>
     </section>
     <section id="tiles">
-        <a class="tile" href="profile">Профиль</a>
-        <a class="tile" href="profile">Профиль</a>
-        <a class="tile" href="profile">Профиль</a>
-        <a class="tile" href="profile">Профиль</a>
+        <a class="tile" href="profile"><div>Профиль</div></a>
+        <a class="tile" href="tasks"><div>Заявки</div></a>
+        <a th:if="${true}" class="tile" href="admin/profiles"><div>Пользователи</div></a>
+        <a th:if="${false}" class="tile" href="admin/departments"><div>Подразделения</div></a>
     </section>
 <!--    <section id="tasks">-->
 <!--        <h3>Управление задачами</h3>-->
