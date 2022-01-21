@@ -49,6 +49,13 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping(path = "/verifyEmail")
+    public String verifyEmail(@RequestParam String email,
+                              @RequestParam String uuid) {
+        userService.verifyEmail(email, uuid);
+        return "redirect:/loginPage";
+    }
+
     @GetMapping(path = "/engineer")
     @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String home(Model model, Authentication authentication) {

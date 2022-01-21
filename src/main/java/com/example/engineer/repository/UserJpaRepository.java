@@ -8,7 +8,7 @@ public interface UserJpaRepository extends CrudRepository<User, Long> {
 
     User findUserByEmail(String email);
 
-    @Query("select u from User u join fetch u.tasks where u.email=:email")
+    @Query("select u from User u left join u.tasks where u.email=:email")
     User findUserWithTasks(String email);
 
     boolean existsByEmail(String email);

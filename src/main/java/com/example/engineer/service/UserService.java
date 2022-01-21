@@ -7,4 +7,6 @@ public interface UserService {
     User saveUser(User user);
 
     User findUserWithTasks(String name);
+
+    void verifyEmail(String email, String uuid);
 }

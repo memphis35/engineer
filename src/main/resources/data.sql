@@ -1,6 +1,6 @@
-delete from engineer.public.task;
-delete from engineer.public.users;
-delete from engineer.public.department;
+-- delete from engineer.public.task;
+-- delete from engineer.public.users;
+-- delete from engineer.public.department;
 
 insert into engineer.public.department
 values (1, 'Конструкторский центр'),
