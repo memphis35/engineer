@@ -5,26 +5,40 @@
     <title>Home</title>
     <link th:href="@{/static/css/styles.css}" href="../static/css/styles.css" type="text/css" rel="stylesheet"/>
     <link th:href="@{/static/css/components.css}" href="../static/css/components.css" type="text/css" rel="stylesheet"/>
-    <link th:href="@{/static/css/login.css}" href="../static/css/login.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/static/css/colors.css}" href="../static/css/colors.css" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/static/css/home.css}" href="../static/css/home.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+<img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
 <header id="header">
-    <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
+
 </header>
+<h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
 <main id="login">
-    <h2 th:text="'Привет, ' + ${user.name}">Привет, _юзернейм_</h2>
-    <section id="tasks">
-        <h3>Управление задачами</h3>
-        <table>
-            <tr>
-                <td>Регистрационный номер</td>
-                <td>Дата регистрации</td>
-                <td>Название</td>
-                <td>Заказчик</td>
-                <td>Статус</td>
-            </tr>
-        </table>
+    <section id="summary">
+        <div>7</div>
+        <div>2</div>
+        <div>3</div>
+        <div>1</div>
     </section>
+    <section id="tiles">
+        <a class="tile" href="profile">Профиль</a>
+        <a class="tile" href="profile">Профиль</a>
+        <a class="tile" href="profile">Профиль</a>
+        <a class="tile" href="profile">Профиль</a>
+    </section>
+<!--    <section id="tasks">-->
+<!--        <h3>Управление задачами</h3>-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td>Регистрационный номер</td>-->
+<!--                <td>Дата регистрации</td>-->
+<!--                <td>Название</td>-->
+<!--                <td>Заказчик</td>-->
+<!--                <td>Статус</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </section>-->
 </main>
 </body>
 </html>

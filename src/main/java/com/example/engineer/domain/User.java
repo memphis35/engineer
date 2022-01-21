@@ -43,16 +43,16 @@ public class User {
     private LocalDateTime passwordChanged;
 
     @Column(name = "is_enabled", insertable = false)
-    private Boolean enabled = true;
+    private Boolean enabled;
 
-    @Column(name = "is_non_locked")
-    private Boolean nonLocked = true;
+    @Column(name = "is_non_locked", insertable = false)
+    private Boolean nonLocked;
 
     @Column(name = "is_account_non_expired", insertable = false)
-    private Boolean accountNonExpired = true;
+    private Boolean accountNonExpired;
 
-    @Column(name = "is_credentials_non_expired")
-    private Boolean credentialNonExpired = true;
+    @Column(name = "is_credentials_non_expired", insertable = false)
+    private Boolean credentialNonExpired;
 
     @OneToMany
     @JoinColumn(name = "customer_id")

@@ -1,3 +1,12 @@
+:root {
+    --invisible-grey: #f2f3f3;
+    --sky-grey: #e7e7ec;
+    --light-grey: #cacbd2;
+    --grey: #9fa1ad;
+    --deep-grey: #5b5d6a;
+    --link-blue: #6a685b;
+}
+
 body {
     color: var(--deep-grey);
     border-color: var(--deep-grey);
@@ -6,9 +15,5 @@ body {
 
 #logo {
     display: block;
-    padding: 10px;
-    border-bottom: 2px solid black;
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    border-bottom: 1px solid var(--deep-grey);
 }

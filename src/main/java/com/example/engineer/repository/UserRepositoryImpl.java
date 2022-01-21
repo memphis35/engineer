@@ -68,10 +68,4 @@ public class UserRepositoryImpl implements UserRepository {
     public User findUserWithTasks(String email) {
         return userJpaRepository.findUserWithTasks(email);
     }
-
-    public static void main(String[] args) {
-        final EmailVerification emailVerification = new EmailVerification("mail@mail.com");
-        System.out.printf("http://localhost:8080/verifyEmail?email=%s&uuid=%s%n",
-                emailVerification.getEmail(), emailVerification.getUuid());
-    }
 }
