@@ -2,9 +2,7 @@ package com.example.engineer.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +29,13 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
         final UserDetails secUser = detailsService.loadUserByUsername(username);
         final String password = (String) authentication.getCredentials();
         final boolean passwordIsMatched = passwordEncoder.matches(password, secUser.getPassword());
-        if (passwordIsMatched) {
+        if (passwordIsMatched && secUser.isAccountNonExpired() && secUser.isAccountNonLocked()) {
             return new UsernamePasswordAuthenticationToken(
                     secUser.getUsername(), secUser.getPassword(), secUser.getAuthorities());
+        } else if (!secUser.isAccountNonExpired()) {
+            throw new AccountExpiredException("Время действия вашего аккаунт истекло. Обратитесь к администратору.");
+        } else if (!secUser.isAccountNonLocked()) {
+            throw new LockedException("Ваш аккаунт заблокирован. Подтвердите регистрацию по ссылке в письме.");
         } else {
             throw new BadCredentialsException("Username or password is incorrect");
         }

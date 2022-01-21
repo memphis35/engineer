@@ -38,6 +38,7 @@ public class MainController {
         user.setEmail(email);
         user.setName(String.format("%s %s", lastName, firstName));
         user.setDepartment(department);
+        log.info("User {} from {} has been created", email, department.getName());
         userService.saveUser(user);
         return "redirect:/loginPage";
     }

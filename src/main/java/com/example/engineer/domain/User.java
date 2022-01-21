@@ -2,9 +2,12 @@ package com.example.engineer.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 @Entity
@@ -28,15 +31,15 @@ public class User {
     @ManyToOne(targetEntity = Department.class)
     private Department department;
 
-    @Column(name = "created", nullable = false)
+    @Column(name = "created", updatable = false, insertable = false, columnDefinition = "timestamp default now()")
     private LocalDateTime createdAt;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, insertable = false, columnDefinition = "varchar(256) default 'ROLE_READ_ONLY'")
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @Column(name = "expiration_date")
-    private LocalDateTime expirationDate;
+    private LocalDate expirationDate;
 
     @Column(name = "password_changed")
     private LocalDateTime passwordChanged;

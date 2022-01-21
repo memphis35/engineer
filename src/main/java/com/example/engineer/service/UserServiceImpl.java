@@ -2,9 +2,9 @@ package com.example.engineer.service;
 
 import com.example.engineer.domain.User;
 import com.example.engineer.repository.UserJpaRepository;
-import com.example.engineer.repository.UserRepository;
 import com.example.engineer.utils.PasswordGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserJpaRepository userJpaRepository;
     private final PasswordEncoder encoder;
@@ -21,10 +22,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackOn = Exception.class)
     public User saveUser(final User user) {
-        final String password = generator.generateDefaultPassword();
-        user.setPassword(encoder.encode(password));
+        final String rawPassword = generator.generateDefaultPassword();
+        user.setPassword(encoder.encode(rawPassword));
+        log.info("Password generated: {}", rawPassword);
         final User savedUser = userJpaRepository.save(user);
-        mailSender.sendRegistrationEmail(user.getEmail());
+        mailSender.sendRegistrationEmail(user.getEmail(), rawPassword);
         return savedUser;
     }
 

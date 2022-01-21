@@ -1,5 +1,5 @@
 package com.example.engineer.service;
 
 public interface MailSender {
-    void sendRegistrationEmail(String email);
+    void sendRegistrationEmail(String email, String password);
 }
