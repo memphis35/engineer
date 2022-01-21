@@ -13,29 +13,53 @@
 <main id="login">
     <h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
     <section id="summary">
-        <div class="summary black">7</div>
-        <div class="summary red">2</div>
-        <div class="summary yellow">3</div>
-        <div class="summary grey">1</div>
+        <div class="summary">
+            <span class="digit deep-grey">156</span>
+            <span>всего</span>
+        </div>
+        <div class="summary">
+            <span class="digit grey">79</span>
+            <span>завершенных</span>
+        </div>
+        <div class="summary">
+            <span class="digit green">4</span>
+            <span>новых</span>
+        </div>
+        <div class="summary">
+            <span class="digit yellow">9</span>
+            <span>требуют внимания</span>
+        </div>
+        <div class="summary">
+            <span class="digit red">13</span>
+            <span>просроченных</span>
+        </div>
     </section>
     <section id="tiles">
-        <a class="tile" href="profile"><div>Профиль</div></a>
-        <a class="tile" href="tasks"><div>Заявки</div></a>
-        <a th:if="${true}" class="tile" href="admin/profiles"><div>Пользователи</div></a>
-        <a th:if="${false}" class="tile" href="admin/departments"><div>Подразделения</div></a>
+        <a class="tile" href="profile">
+            <div>Профиль</div>
+        </a>
+        <a class="tile" href="tasks">
+            <div>Заявки</div>
+        </a>
+        <a th:if="${true}" class="tile" href="admin/profiles">
+            <div>Пользователи</div>
+        </a>
+        <a th:if="${false}" class="tile" href="admin/departments">
+            <div>Подразделения</div>
+        </a>
     </section>
-<!--    <section id="tasks">-->
-<!--        <h3>Управление задачами</h3>-->
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <td>Регистрационный номер</td>-->
-<!--                <td>Дата регистрации</td>-->
-<!--                <td>Название</td>-->
-<!--                <td>Заказчик</td>-->
-<!--                <td>Статус</td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--    </section>-->
+    <!--    <section id="tasks">-->
+    <!--        <h3>Управление задачами</h3>-->
+    <!--        <table>-->
+    <!--            <tr>-->
+    <!--                <td>Регистрационный номер</td>-->
+    <!--                <td>Дата регистрации</td>-->
+    <!--                <td>Название</td>-->
+    <!--                <td>Заказчик</td>-->
+    <!--                <td>Статус</td>-->
+    <!--            </tr>-->
+    <!--        </table>-->
+    <!--    </section>-->
 </main>
 </body>
 </html>

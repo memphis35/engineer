@@ -22,14 +22,19 @@ section {
     min-width: 150px;
     text-align: center;
     vertical-align: center;
-    font-size: 60px;
     font-weight: bold;
 }
 
+.digit {
+    display: block;
+    font-size: 60px;
+}
+
 #tiles {
+    padding: 25px;
     min-height: 250px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -57,6 +62,10 @@ section {
 
 .grey {
     color: var(--grey);
+}
+
+.green {
+    color: forestgreen;
 }
 
 .red {
