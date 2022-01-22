@@ -26,8 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .defaultSuccessUrl("/engineer", true);
-        http.csrf().ignoringAntMatchers("/register", "/login");
+                .loginPage("/login")
+                .defaultSuccessUrl("/engineer")
+                .failureForwardUrl("/login?error=true")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true);
+        http.csrf().ignoringAntMatchers("/register", "/login", "/logout");
         http.authorizeHttpRequests().mvcMatchers("/register").permitAll()
                 .and()
                 .authorizeHttpRequests().mvcMatchers("/engineer/**").authenticated();

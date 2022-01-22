@@ -60,6 +60,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("id: %s, email: %s, name: %s, auths: %s", id, email, name, role);
+        return String.format("id: %s, email: %s, name: %s", id, email, name);
     }
 }

@@ -36,3 +36,23 @@ a {
     border-color: var(--deep-grey);
     color: var(--sky-grey);
 }
+
+.black {
+    color: var(--deep-grey);
+}
+
+.grey {
+    color: var(--grey);
+}
+
+.green {
+    color: forestgreen;
+}
+
+.red {
+    color: darkred;
+}
+
+.yellow {
+    color: goldenrod;
+}

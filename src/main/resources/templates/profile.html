@@ -33,32 +33,19 @@
             <span>просроченных</span>
         </div>
     </section>
-    <section id="tiles">
-        <a class="tile" th:href="@{'/engineer/profile/' + ${user.id}}">
-            <div>Профиль</div>
-        </a>
-        <a class="tile" th:href="@{'/engineer/tasks/' + ${user.id}}">
-            <div>Заявки</div>
-        </a>
-        <a th:if="${true}" class="tile" th:href="@{admin/profiles}">
-            <div>Пользователи</div>
-        </a>
-        <a th:if="${false}" class="tile" th:href="@{admin/departments}">
-            <div>Подразделения</div>
-        </a>
+    <section id="settings">
+        <h2>Настройки профиля</h2>
+        <p th:if="${hasError}" th:text="${error}" class="red"></p>
+        <form th:if="${not hasError}">
+            <label for="input-id">Идентификатор: </label>
+            <input id="input-id" class="text-field" type="number" th:value="${user.id}" disabled/>
+            <label for="input-name">Имя: </label>
+            <input id="input-name" class="text-field" type="text" name="firstName" th:value="${user.name}"/>
+            <label for="input-email">Почтовый ящик: </label>
+            <input id="input-email" class="text-field" type="email" name="email" th:value="${user.email}"/>
+            <button id="update-button" class="btn" type="submit">Обновить</button>
+        </form>
     </section>
-    <!--    <section id="tasks">-->
-    <!--        <h3>Управление задачами</h3>-->
-    <!--        <table>-->
-    <!--            <tr>-->
-    <!--                <td>Регистрационный номер</td>-->
-    <!--                <td>Дата регистрации</td>-->
-    <!--                <td>Название</td>-->
-    <!--                <td>Заказчик</td>-->
-    <!--                <td>Статус</td>-->
-    <!--            </tr>-->
-    <!--        </table>-->
-    <!--    </section>-->
 </main>
 </body>
 </html>

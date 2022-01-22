@@ -37,7 +37,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User findUserByEmail(String email) {
-        return userJpaRepository.findUserByEmail(email);
+        return userJpaRepository.findUserByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
         emailVerificationCrud.findByEmailAndUuidAndExpiredAtAfter(email, uuid, LocalDateTime.now())
                 .ifPresentOrElse(emailVerification -> {
                     log.debug("E-mail verification UUID has been found");
-                    final User user = userJpaRepository.findUserByEmail(emailVerification.getEmail());
+                    final User user = userJpaRepository.findUserByEmail(emailVerification.getEmail()).orElseThrow();
                     user.setEnabled(true);
                     log.info("User {} is now enabled and can login into the system", user.getEmail());
                     emailVerificationCrud.delete(emailVerification);

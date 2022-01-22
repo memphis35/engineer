@@ -19,11 +19,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (userJpaRepository.existsByEmail(username)) {
-            log.info("User with email [{}] has been found", username);
-            return new SecurityUser(userJpaRepository.findUserByEmail(username));
-        } else {
-            throw new UsernameNotFoundException("User with " + username + " doesn't exist");
-        }
+        return userJpaRepository.findUserByEmail(username)
+                .map(SecurityUser::new)
+                .orElseThrow(() -> new UsernameNotFoundException("User with " + username + " doesn't exist"));
     }
 }

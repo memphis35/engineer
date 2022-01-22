@@ -40,11 +40,12 @@ public class MainController {
         user.setDepartment(department);
         log.info("User {} from {} has been created", email, department.getName());
         userService.saveUser(user);
-        return "redirect:/loginPage";
+        return "redirect:/login";
     }
 
-    @GetMapping(path = "/loginPage")
-    public String login(Model model) {
+    @GetMapping(path = "/login")
+    public String login(Model model, @RequestParam(defaultValue = "false") String error) {
+        if (error.equals("true")) model.addAttribute("isError", true);
         model.addAttribute("departments", departmentCrud.findAll());
         return "login";
     }
@@ -53,7 +54,7 @@ public class MainController {
     public String verifyEmail(@RequestParam String email,
                               @RequestParam String uuid) {
         userService.verifyEmail(email, uuid);
-        return "redirect:/loginPage";
+        return "redirect:/login";
     }
 
     @GetMapping(path = "/engineer")

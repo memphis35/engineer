@@ -16,12 +16,14 @@
     <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
     <div id="login-block">
         <h3>Войти в систему</h3>
+        <p th:if="${isError}">Error Message</p>
         <form action="/login" method="post">
             <label for="username" hidden></label>
             <input id="username" class="text-field" name="username" type="text" placeholder="user@mail.com">
             <label for="password" hidden></label>
             <input id="password" class="text-field" name="password" type="password" placeholder="password">
-            <input name="_csrf" th:value="${_csrf.token}" hidden>
+            <label for="_csrf" hidden></label>
+            <input id="_csrf" name="_csrf" th:value="${_csrf.token}" hidden>
             <button class="btn" type="submit">Войти</button>
             <button class="btn" type="button" onclick="showRegister()">Зарегистрироваться</button>
         </form>
