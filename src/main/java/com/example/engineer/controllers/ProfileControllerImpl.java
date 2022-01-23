@@ -25,19 +25,18 @@ public class ProfileControllerImpl implements ProfileController {
     @GetMapping("/{id}")
     @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String getProfile(@PathVariable Long id, Authentication userDetails, Model model) {
-        if (this.canPerformOperation(userDetails, id)) {
-            model.addAttribute("hasError", false);
-            model.addAttribute("user", cachedUsers.remove(id));
-        } else {
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", "Не хватает прав для просмотра пользователя #" + id);
+        final boolean hasAccess = this.canPerformOperation(userDetails, id);
+        model.addAttribute("hasAccess", hasAccess);
+        if (!hasAccess) {
+            model.addAttribute("error",
+                    "Не хватает прав для просмотра/редактирования пользователя #" + id);
         }
+        model.addAttribute("user", cachedUsers.remove(id));
         return "profile";
     }
 
     @Override
     @PostMapping("/{id}")
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String updateProfile(@PathVariable Long id,
                                 @RequestParam String firstName,
                                 @RequestParam String lastName,
@@ -57,17 +56,16 @@ public class ProfileControllerImpl implements ProfileController {
 
     @Override
     @DeleteMapping("/{id}")
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String deleteProfile(@PathVariable Long id) {
-        return "profile";
+        return "forward:login" + id;
     }
 
-    private boolean canPerformOperation(Authentication userDetails, Long id) {
-        final User loggedUser = repository.findUserByEmail(userDetails.getName());
-        final boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+    private boolean canPerformOperation(Authentication authentication, Long id) {
+        final User loggedUser = repository.findUserByEmail(authentication.getName());
+        final boolean isUser = authentication.getAuthorities().stream()
+                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_READ_ONLY"));
         final boolean canBeLoad = Objects.equals(loggedUser.getId(), id);
-        if (canBeLoad || isAdmin) cachedUsers.put(id, loggedUser);
-        return canBeLoad || isAdmin;
+        cachedUsers.put(id, loggedUser);
+        return canBeLoad && isUser;
     }
 }

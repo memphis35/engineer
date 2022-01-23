@@ -1,6 +1,7 @@
 package com.example.engineer.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Table(schema = "public", name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +59,13 @@ public class User {
     @OneToMany
     @JoinColumn(name = "customer_id")
     private Set<Task> tasks;
+
+    public User(Long id, String email, String name, Role role) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.role = role;
+    }
 
     @Override
     public String toString() {

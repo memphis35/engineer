@@ -35,8 +35,8 @@
     </section>
     <section id="settings">
         <h2>Настройки профиля</h2>
-        <p th:if="${hasError}" th:text="${error}" class="red"></p>
-        <form th:if="${not hasError}">
+        <p th:if="${not hasAccess}" th:text="${error}" class="red"></p>
+        <form th:if="${hasAccess}">
             <label for="input-id">Идентификатор: </label>
             <input id="input-id" class="text-field" type="number" th:value="${user.id}" disabled/>
             <label for="input-name">Имя: </label>
