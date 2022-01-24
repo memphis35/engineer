@@ -23,33 +23,32 @@ public class ProfileControllerImpl implements ProfileController {
 
     @Override
     @GetMapping("/{id}")
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String getProfile(@PathVariable Long id, Authentication userDetails, Model model) {
         final boolean hasAccess = this.canPerformOperation(userDetails, id);
         model.addAttribute("hasAccess", hasAccess);
         if (!hasAccess) {
             model.addAttribute("error",
-                    "Не хватает прав для просмотра/редактирования пользователя #" + id);
+                    "Не хватает прав для просмотра пользователя");
         }
         model.addAttribute("user", cachedUsers.remove(id));
         return "profile";
     }
 
     @Override
-    @PostMapping("/{id}")
+    @PostMapping(value = "/{id}")
     public String updateProfile(@PathVariable Long id,
                                 @RequestParam String firstName,
                                 @RequestParam String lastName,
                                 Authentication userDetails, Model model) {
-        if (this.canPerformOperation(userDetails, id)) {
-            User userToUpdate = cachedUsers.remove(id);
-            userToUpdate.setName(firstName + " " + lastName);
-            repository.createUser(userToUpdate);
-            model.addAttribute("hasError", false);
-            model.addAttribute("user", userToUpdate);
-        } else {
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", "Не хватает прав для редактирования пользователя #" + id);
+        final boolean hasAccess = this.canPerformOperation(userDetails, id);
+        model.addAttribute("hasAccess", hasAccess);
+        final User userToUpdate = cachedUsers.remove(id);
+        userToUpdate.setName(firstName + " " + lastName);
+        repository.createUser(userToUpdate);
+        model.addAttribute("user", userToUpdate);
+        if (!hasAccess) {
+            model.addAttribute("error",
+                    "Не хватает прав для редактирования пользователя");
         }
         return "profile";
     }

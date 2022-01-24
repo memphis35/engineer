@@ -13,7 +13,16 @@ on conflict do nothing;
 insert into engineer.public.users (id, email, password, name, department_id, role, expiration_date, created)
 values (-1, 'asmirnov@engineer.com', '$2a$12$ed2d32KFaQgvGuT8SxeKY.4sLBJiNfcx1BVavEfUpvCBtZ40J2cWW', 'Александр Смирнов',
         4,
-        'ROLE_ADMIN', '2022-12-31 23:59:59', now())
+        'ROLE_ADMIN', '2022-12-31 23:59:59', now()),
+       (-2, 'readonly@engineer.com', '$2a$12$ed2d32KFaQgvGuT8SxeKY.4sLBJiNfcx1BVavEfUpvCBtZ40J2cWW', 'READ_ONLY',
+        4,
+        'ROLE_READ_ONLY', '2022-12-31 23:59:59', now()),
+       (-3, 'user1@engineer.com', '$2a$12$ed2d32KFaQgvGuT8SxeKY.4sLBJiNfcx1BVavEfUpvCBtZ40J2cWW', 'USER_1',
+        4,
+        'ROLE_USER', '2022-12-31 23:59:59', now()),
+       (-4, 'user2@engineer.com', '$2a$12$ed2d32KFaQgvGuT8SxeKY.4sLBJiNfcx1BVavEfUpvCBtZ40J2cWW', 'USER_2',
+        4,
+        'ROLE_USER', '2022-12-31 23:59:59', now())
 on conflict do nothing;
 
 insert into engineer.public.task (id, registration_number, title, customer_id, comment)

@@ -8,6 +8,10 @@
     <link th:href="@{/css/home.css}" href="../static/css/home.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+<form id="logout" action="/logout" method="post">
+    <input name="_csrf" th:value="${_csrf}" hidden>
+    <input class="btn" type="submit" value="выйти">
+</form>
 <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
 <main id="login">
     <h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
@@ -40,25 +44,13 @@
         <a class="tile" th:href="@{'/engineer/tasks/' + ${user.id}}">
             <div>Заявки</div>
         </a>
-        <a th:if="${true}" class="tile" th:href="@{admin/profiles}">
+        <a th:if="${user.role.name.equals('ROLE_ADMIN')}" class="tile" th:href="@{admin/profiles}">
             <div>Пользователи</div>
         </a>
-        <a th:if="${false}" class="tile" th:href="@{admin/departments}">
+        <a th:if="${user.role.name.equals('ROLE_ADMIN')}" class="tile" th:href="@{admin/departments}">
             <div>Подразделения</div>
         </a>
     </section>
-    <!--    <section id="tasks">-->
-    <!--        <h3>Управление задачами</h3>-->
-    <!--        <table>-->
-    <!--            <tr>-->
-    <!--                <td>Регистрационный номер</td>-->
-    <!--                <td>Дата регистрации</td>-->
-    <!--                <td>Название</td>-->
-    <!--                <td>Заказчик</td>-->
-    <!--                <td>Статус</td>-->
-    <!--            </tr>-->
-    <!--        </table>-->
-    <!--    </section>-->
 </main>
 </body>
 </html>
