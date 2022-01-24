@@ -38,16 +38,16 @@
         </div>
     </section>
     <section id="tiles">
-        <a class="tile" th:href="@{'/engineer/profile/' + ${user.id}}">
+        <a class="tile" th:href="@{/engineer/profile/{id}(id = ${user.id})}">
             <div>Профиль</div>
         </a>
-        <a class="tile" th:href="@{'/engineer/tasks/' + ${user.id}}">
+        <a class="tile" th:href="@{/engineer/tasks/{id}(id = ${user.id})}">
             <div>Заявки</div>
         </a>
-        <a th:if="${user.role.name.equals('ROLE_ADMIN')}" class="tile" th:href="@{admin/profiles}">
+        <a th:if="${user.role.name == 'ROLE_ADMIN'}" class="tile" th:href="@{admin/profiles}">
             <div>Пользователи</div>
         </a>
-        <a th:if="${user.role.name.equals('ROLE_ADMIN')}" class="tile" th:href="@{admin/departments}">
+        <a th:if="${user.role.name == 'ROLE_ADMIN'}" class="tile" th:href="@{admin/departments}">
             <div>Подразделения</div>
         </a>
     </section>

@@ -1,6 +1,8 @@
 package com.example.engineer.controllers;
 
 import com.example.engineer.domain.Department;
+import com.example.engineer.domain.Task;
+import com.example.engineer.domain.TaskStatus;
 import com.example.engineer.domain.User;
 import com.example.engineer.repository.DepartmentCrud;
 import com.example.engineer.service.UserService;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Validated
@@ -61,7 +66,10 @@ public class MainController {
     @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String home(Model model, Authentication authentication) {
         final User user = userService.findUserWithTasks(authentication.getName());
+        final Map<TaskStatus, List<Task>> groupedTasks = user.getTasks().stream()
+                        .collect(Collectors.groupingBy(Task::getStatus));
         model.addAttribute("user", user);
+        model.addAttribute("tasks", groupedTasks);
         return "home";
     }
 }
