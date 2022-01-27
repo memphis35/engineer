@@ -49,10 +49,10 @@
         </table>
     </section>
     <section id="tiles">
-        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/engineer/profile/{id}(id = ${user.id})}">
+        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/profile/{id}(id = ${user.id})}">
             <div>Профиль</div>
         </a>
-        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/engineer/tasks/{id}(id = ${user.id})}">
+        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/tasks/{id}(id = ${user.id})}">
             <div>Заявки</div>
         </a>
         <a th:if="${user.role.name == 'ROLE_ADMIN'}" class="tile" th:href="@{admin/profiles}">

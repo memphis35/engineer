@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
-@RequestMapping("/engineer/profile")
+@RequestMapping("/profile/{id}")
 @RequiredArgsConstructor
 public class ProfileControllerImpl implements ProfileController {
 
@@ -22,7 +22,7 @@ public class ProfileControllerImpl implements ProfileController {
     private final Map<Long, User> cachedUsers = new ConcurrentHashMap<>();
 
     @Override
-    @GetMapping("/{id}")
+    @GetMapping
     public String getProfile(@PathVariable Long id, Authentication userDetails, Model model) {
         final boolean hasAccess = this.canPerformOperation(userDetails, id);
         model.addAttribute("hasAccess", hasAccess);
@@ -35,7 +35,7 @@ public class ProfileControllerImpl implements ProfileController {
     }
 
     @Override
-    @PostMapping(value = "/{id}")
+    @PostMapping
     public String updateProfile(@PathVariable Long id,
                                 @RequestParam String firstName,
                                 @RequestParam String lastName,
@@ -54,7 +54,7 @@ public class ProfileControllerImpl implements ProfileController {
     }
 
     @Override
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public String deleteProfile(@PathVariable Long id) {
         return "forward:login" + id;
     }
@@ -69,12 +69,17 @@ public class ProfileControllerImpl implements ProfileController {
     }
 
     @Override
-    public String updateEmail(Long id, String newEmail) {
-        return "engineer";
+    @PostMapping("/updateEmail")
+    public String updateEmail(@PathVariable Long id,
+                              @RequestParam(required = false) String newEmail) {
+        return "home";
     }
 
     @Override
-    public String updatePassword(Long id, String oldPassword, String newPassword) {
-        return "engineer";
+    @PostMapping("/updatePassword")
+    public String updatePassword(@PathVariable Long id,
+                                 @RequestParam(required = false) String oldPassword,
+                                 @RequestParam(required = false) String newPassword) {
+        return "home";
     }
 }

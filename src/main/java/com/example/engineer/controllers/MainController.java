@@ -6,7 +6,6 @@ import com.example.engineer.repository.TaskCrudRepository;
 import com.example.engineer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +62,7 @@ public class MainController {
         return "redirect:/login";
     }
 
-    @GetMapping(path = "/engineer")
+    @GetMapping(path = "/home")
     public String home(Model model, Authentication authentication) {
         final User user = userService.findUserWithTasks(authentication.getName());
         final Collection<Task> tasks = user.getRole() != Role.ROLE_READ_ONLY
