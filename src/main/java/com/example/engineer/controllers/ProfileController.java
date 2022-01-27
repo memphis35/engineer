@@ -10,4 +10,8 @@ public interface ProfileController {
     String updateProfile(Long id, String firstName, String lastName, Authentication userDetails, Model model);
 
     String deleteProfile(Long id);
+
+    String updateEmail(Long id, String newEmail);
+
+    String updatePassword(Long id, String oldPassword, String newPassword);
 }

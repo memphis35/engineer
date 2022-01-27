@@ -1,9 +1,9 @@
 package com.example.engineer.controllers;
 
+import com.example.engineer.domain.Role;
 import com.example.engineer.domain.User;
 import com.example.engineer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,9 +62,19 @@ public class ProfileControllerImpl implements ProfileController {
     private boolean canPerformOperation(Authentication authentication, Long id) {
         final User loggedUser = repository.findUserByEmail(authentication.getName());
         final boolean isUser = authentication.getAuthorities().stream()
-                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_READ_ONLY"));
+                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(Role.ROLE_READ_ONLY.name()));
         final boolean canBeLoad = Objects.equals(loggedUser.getId(), id);
         cachedUsers.put(id, loggedUser);
         return canBeLoad && isUser;
+    }
+
+    @Override
+    public String updateEmail(Long id, String newEmail) {
+        return "engineer";
+    }
+
+    @Override
+    public String updatePassword(Long id, String oldPassword, String newPassword) {
+        return "engineer";
     }
 }
