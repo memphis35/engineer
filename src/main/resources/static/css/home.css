@@ -67,16 +67,20 @@ section {
     flex-direction: column;
     align-items: center;
     width: 20%;
-    border-right: var(--deep-grey) 2px solid;
+
     padding: 20px;
+    transition: all;
+    transition-duration: 500ms;
+    transition-timing-function: ease;
 }
 
-.settings-field:first-child {
-    border-left: var(--deep-grey) 2px solid;
+.settings-field:hover {
+    transform: scale(1.05);
+    border-right: var(--deep-grey) 1px solid;
+    border-left: var(--deep-grey) 1px solid;
 }
 
 h3 {
-    /*border: forestgreen 1px solid;*/
     text-align: center;
     vertical-align: top;
     min-height: 80px;
