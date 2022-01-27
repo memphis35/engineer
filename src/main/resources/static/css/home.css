@@ -56,6 +56,32 @@ section {
     color: var(--sky-grey);
 }
 
-#settings {
+#profile-settings {
+    width: 75%;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.settings-field {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 20%;
+    border-right: var(--deep-grey) 2px solid;
+    padding: 20px;
+}
+
+.settings-field:first-child {
+    border-left: var(--deep-grey) 2px solid;
+}
+
+h3 {
+    /*border: forestgreen 1px solid;*/
+    text-align: center;
+    vertical-align: top;
+    min-height: 80px;
+}
+
+.settings-form {
+    min-height: 250px;
 }

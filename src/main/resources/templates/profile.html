@@ -10,41 +10,45 @@
 <body>
 <img id="logo" th:src="@{/img/logo.png}" src="../static/img/logo.png" alt="app logo"/>
 <main id="login">
-    <h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
-    <section id="summary">
-        <div class="summary">
-            <span class="digit deep-grey">156</span>
-            <span>всего</span>
-        </div>
-        <div class="summary">
-            <span class="digit grey">79</span>
-            <span>завершенных</span>
-        </div>
-        <div class="summary">
-            <span class="digit green">4</span>
-            <span>новых</span>
-        </div>
-        <div class="summary">
-            <span class="digit yellow">9</span>
-            <span>требуют внимания</span>
-        </div>
-        <div class="summary">
-            <span class="digit red">13</span>
-            <span>просроченных</span>
-        </div>
-    </section>
-    <section id="settings">
-        <h2>Настройки профиля</h2>
-        <p th:if="${not hasAccess}" th:text="${error}" class="red"></p>
-        <form th:if="${hasAccess}">
-            <label for="input-id">Идентификатор: </label>
-            <input id="input-id" class="text-field" type="number" th:value="${user.id}" disabled/>
-            <label for="input-name">Имя: </label>
-            <input id="input-name" class="text-field" type="text" name="firstName" th:value="${user.name}"/>
-            <label for="input-email">Почтовый ящик: </label>
-            <input id="input-email" class="text-field" type="email" name="email" th:value="${user.email}"/>
-            <button id="update-button" class="btn" type="submit">Обновить</button>
-        </form>
+    <h2>Настройки профиля</h2>
+    <section id="profile-settings" th:if="${hasAccess}">
+        <article class="settings-field">
+            <h3>Изменение персональных данных</h3>
+            <form id="update-personal" class="settings-form" th:action="@{/engineer/{id}(id = ${user.id})}" method="post">
+                <label for="input-id" hidden>Идентификатор: </label>
+                <input id="input-id" class="text-field" type="hidden" th:value="${user.id}"/>
+                <label for="input-firstname">Имя: </label>
+                <input id="input-firstname" class="text-field" type="text" name="firstName" th:value="${user.name}"/>
+                <label for="input-lastname">Фамилия: </label>
+                <input id="input-lastname" class="text-field" type="text" name="firstName" th:value="${user.name}"/>
+            </form>
+            <button form="update-personal" id="update-button" class="btn" type="submit">Обновить</button>
+        </article>
+        <article class="settings-field">
+            <h3>Смена почтового адреса</h3>
+            <form id="update-email" class="settings-form" th:action="@{/engineer/{id}(id = ${user.id})/changeEmail}" method="post">
+                <label for="input-email">Почтовый ящик: </label>
+                <input id="input-email" class="text-field" type="email" name="email" th:value="${user.email}"/>
+            </form>
+            <button form="update-email" id="change-email" class="btn" type="submit">Сменить почтовый ящик</button>
+        </article>
+        <article class="settings-field">
+            <h3>Смена пароля</h3>
+            <form id="update-password" class="settings-form" th:action="@{/engineer/{id}(id = ${user.id})/changePassword}" method="post">
+                <label for="input-password">Введите старый пароль: </label>
+                <input id="input-password" class="text-field" type="email" name="email" th:value="${user.email}"/>
+                <label for="input-new-password">Введите новый пароль: </label>
+                <input id="input-new-password" class="text-field" type="email" name="email" th:value="${user.email}"/>
+                <label for="input-new-password-check">Повторите новый пароль: </label>
+                <input id="input-new-password-check" class="text-field" type="email" name="email"
+                       th:value="${user.email}"/>
+            </form>
+            <button form="update-password" id="change-password" class="btn" type="submit">Сменить пароль</button>
+        </article>
+        <article class="settings-field">
+            <h3>Установка двухфакторной аутентификации</h3>
+            <p>in progress, not implemented yet</p>
+        </article>
     </section>
 </main>
 </body>
