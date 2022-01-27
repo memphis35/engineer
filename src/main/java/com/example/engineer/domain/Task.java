@@ -26,7 +26,11 @@ public class Task {
     private String title;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private TaskStatus status;
+
+    @Column(name = "expiration_date")
+    private LocalDate expirationDate;
 
     @Column(name = "comment")
     private String comment;

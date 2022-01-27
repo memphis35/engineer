@@ -1,10 +1,8 @@
 package com.example.engineer.controllers;
 
-import com.example.engineer.domain.Department;
-import com.example.engineer.domain.Task;
-import com.example.engineer.domain.TaskStatus;
-import com.example.engineer.domain.User;
+import com.example.engineer.domain.*;
 import com.example.engineer.repository.DepartmentCrud;
+import com.example.engineer.repository.TaskCrudRepository;
 import com.example.engineer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,6 +32,7 @@ public class MainController {
 
     private final DepartmentCrud departmentCrud;
     private final UserService userService;
+    private final TaskCrudRepository taskCrudRepository;
 
     @PostMapping(path = "/register")
     public String register(@RequestParam @NotBlank String firstName,
@@ -63,13 +64,26 @@ public class MainController {
     }
 
     @GetMapping(path = "/engineer")
-    @Secured(value = {"ROLE_USER", "ROLE_ADMIN"})
     public String home(Model model, Authentication authentication) {
         final User user = userService.findUserWithTasks(authentication.getName());
-        final Map<TaskStatus, List<Task>> groupedTasks = user.getTasks().stream()
-                        .collect(Collectors.groupingBy(Task::getStatus));
+        final Collection<Task> tasks = user.getRole() != Role.ROLE_READ_ONLY
+                ? user.getTasks()
+                : taskCrudRepository.findAll();
+        final Map<String, List<Task>> groupedTasks = tasks.stream()
+                .collect(Collectors.groupingBy(task -> task.getStatus().name()));
+        final Long attentionTasks = tasks.stream()
+                .filter(task -> task.getStatus() != TaskStatus.DONE)
+                .filter(task -> task.getExpirationDate().minusDays(14).isBefore(LocalDate.now()))
+                .count();
+        final Long expiredTasks = tasks.stream()
+                .filter(task -> task.getStatus() != TaskStatus.DONE)
+                .filter(task -> task.getExpirationDate().isBefore(LocalDate.now()))
+                .count();
         model.addAttribute("user", user);
+        model.addAttribute("taskCount", tasks.size());
         model.addAttribute("tasks", groupedTasks);
+        model.addAttribute("requiresAttention", attentionTasks);
+        model.addAttribute("expired", expiredTasks);
         return "home";
     }
 }

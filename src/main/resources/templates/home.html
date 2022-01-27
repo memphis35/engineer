@@ -17,31 +17,42 @@
     <h2 th:text="'Привет, ' + ${user.name}">Привет, $username!</h2>
     <section id="summary">
         <div class="summary">
-            <span class="digit deep-grey">156</span>
+            <span class="digit deep-grey" th:text="${taskCount}">156</span>
             <span>всего</span>
         </div>
         <div class="summary">
-            <span class="digit grey">79</span>
+            <span class="digit grey" th:text="${#maps.containsKey(tasks, 'DONE')} ? ${tasks.get('DONE').size()} : 0">79</span>
             <span>завершенных</span>
         </div>
         <div class="summary">
-            <span class="digit green">4</span>
+            <span class="digit green" th:text="${#maps.containsKey(tasks, 'CREATED')} ? ${tasks.get('CREATED').size()} : 0">4</span>
             <span>новых</span>
         </div>
         <div class="summary">
-            <span class="digit yellow">9</span>
+            <span class="digit yellow" th:text="${requiresAttention}">9</span>
             <span>требуют внимания</span>
         </div>
         <div class="summary">
-            <span class="digit red">13</span>
+            <span class="digit red" th:text="${expired}">13</span>
             <span>просроченных</span>
         </div>
     </section>
+    <section th:if="${user.role.name == 'ROLE_READ_ONLY'}" class="task-table">
+        <table id="tasks">
+            <tr>
+                <td>Номер заявки</td>
+                <td>Название</td>
+                <td>Статус</td>
+                <td>Создатель</td>
+                <td>Дата завершения</td>
+            </tr>
+        </table>
+    </section>
     <section id="tiles">
-        <a class="tile" th:href="@{/engineer/profile/{id}(id = ${user.id})}">
+        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/engineer/profile/{id}(id = ${user.id})}">
             <div>Профиль</div>
         </a>
-        <a class="tile" th:href="@{/engineer/tasks/{id}(id = ${user.id})}">
+        <a class="tile" th:if="${user.role.name != 'ROLE_READ_ONLY'}" th:href="@{/engineer/tasks/{id}(id = ${user.id})}">
             <div>Заявки</div>
         </a>
         <a th:if="${user.role.name == 'ROLE_ADMIN'}" class="tile" th:href="@{admin/profiles}">

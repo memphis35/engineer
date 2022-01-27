@@ -29,6 +29,7 @@ create table if not exists engineer.public.task
     title               varchar(256) not null,
     customer_id         bigint       not null,
     status              varchar(256) not null default 'CREATED',
+    expiration_date     date,
     comment             varchar(256)
 );
 
