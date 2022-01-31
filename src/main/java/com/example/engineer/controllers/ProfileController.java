@@ -2,6 +2,9 @@ package com.example.engineer.controllers;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ProfileController {
 
@@ -13,5 +16,5 @@ public interface ProfileController {
 
     String updateEmail(Long id, String newEmail);
 
-    String updatePassword(Long id, String oldPassword, String newPassword);
+    String updatePassword(Long id, String oldPassword, String newPassword, Authentication userDetails, Model model);
 }

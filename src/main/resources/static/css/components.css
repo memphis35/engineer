@@ -37,6 +37,25 @@ a {
     color: var(--sky-grey);
 }
 
+.success-message, .error-message {
+    padding: 10px;
+    width: 30%;
+    color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.success-message {
+    background-color: palegreen;
+    border-color: forestgreen;
+}
+
+.error-message {
+    background-color: red;
+    border-color: darkred;
+}
+
 .black {
     color: var(--deep-grey);
 }
